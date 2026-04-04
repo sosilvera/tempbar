@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Noche</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <a href="/barman" class="btn btn-secondary mb-4">&larr; Volver al Menú</a>
+        <h2>Gestión de la Noche</h2>
+        
+        <div class="card bg-dark border-secondary mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Estado: <span id="estado-noche" class="text-danger">Cerrado</span></h5>
+                <button class="btn btn-success me-2" onclick="abrirNoche()">Abrir Barra</button>
+                <button class="btn btn-danger" onclick="cerrarNoche()">Cerrar Barra</button>
+            </div>
+        </div>
+
+        <h4>Cargar Stock de la Noche</h4>
+        <form id="form-stock" class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label>Ingrediente</label>
+                <select class="form-select bg-secondary text-white border-0" id="select-ingrediente"></select>
+            </div>
+            <div class="col-md-4">
+                <label>Cantidad (ml/gr/un)</label>
+                <input type="number" class="form-control bg-secondary text-white border-0" id="cantidad-stock">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-primary w-100" onclick="agregarStock()">Agregar</button>
+            </div>
+        </form>
+
+        <table class="table table-dark">
+            <thead><tr><th>Ingrediente</th><th>Cantidad Disponible</th></tr></thead>
+            <tbody id="tabla-stock"></tbody>
+        </table>
+    </div>
+    <script src="js/barman_noche.js"></script>
+</body>
+</html>

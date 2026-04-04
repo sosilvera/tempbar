@@ -1,0 +1,13 @@
+body {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+.card-trago {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    transition: transform 0.2s;
+}
+.card-trago:hover {
+    transform: scale(1.02);
+    border-color: #0d6efd;
+}
