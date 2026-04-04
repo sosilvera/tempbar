@@ -1,0 +1,64 @@
+/* Tarjeta y Alertas Glassmorphism */
+.glass-card, .glass-alert {
+    background: rgba(25, 30, 40, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Input grande y cómodo para dedos */
+.glass-input {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 15px;
+    padding: 12px 20px;
+}
+.glass-input:focus {
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    border-color: #00f2fe !important;
+    color: white !important;
+}
+
+/* Botón Neón Verde/Celeste para Agregar */
+.btn-neon-success {
+    background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    color: #121212;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-neon-success:hover, .btn-neon-success:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(56, 239, 125, 0.6);
+    color: #121212;
+}
+
+/* Tarjeta individual de la lista (Fácil de leer) */
+.ingrediente-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+/* Botón de eliminar amplio para evitar fallar con el dedo */
+.btn-delete {
+    background: rgba(255, 65, 108, 0.1);
+    color: #ff4b2b;
+    border: 1px solid rgba(255, 65, 108, 0.3);
+    border-radius: 12px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.btn-delete:hover, .btn-delete:active {
+    background: #ff4b2b;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
+}

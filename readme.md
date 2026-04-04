@@ -23,8 +23,8 @@ Las APIs identificadas son las siguientes
 		-/get_ingredientes -> [DONE]
 		-/crear_noche -> [DONE]
 	- En Crear trago:
-		-/get_master_ingredientes
-		-/crear_trago
+		-/get_ingredientes -> [DONE]
+		-/crear_trago -> [DONE]
 	- En Ver Pedidos:
 		-/get_pedidos -> [DONE]
 		-/get_pedido/idPedido [DONE]
@@ -61,25 +61,14 @@ La base de datos consta de las siguientes tablas
 	-nombre
 	-idTrago
 
+Tiene las siguientes pantallas:
+Cliente:
+- /tempbar/pedir: realizar pedido de trago -> [DONE]
 
-Yo suelo trbajar con un template que usa: FastAPI, SQLAlchemy, MySQL y Boostrap. En routes se definen las rutas estaticas por un lado (que me permiten llamar a los html de cada pantalla), y las rutas de servicios por otro, suelo dividirlo tambien por funcionalidad/pantalla.
-En static estan los archivos html,css y js necesarios para el renderizado.
-En models defino el modelo de la base de datos.
-Template:
-requeriments.txt
-.env
-src:
-|_commons
-|_main.py
-|_models
-|_routes
-|_schema
-|_static
-
-
-Quiero que:
-- Me armes los HTML, JS y CSS de las pantallas involucradas, utilizando boostrap y siguiendo el diseño adjunto, obviamente agregandole color y haciendolo responsive
-- Armes los servicios
-- Armes el script de creacion de la base de datos en SQL
-- Armes los models
-- Interpretes los comentarios en la imagen y lo tengas en cuenta para el armado
+Barman:
+- /tempbar/barman: dashboard del barman -> [DONE]
+- Ver pedidos - /tempbar/pedidos: listado de pedidos pendientes -> [DONE]
+- Crear trago (/tempbar/crear_trago)
+- Crear noche (/tempbar/crear_noche)
+- Modificar noche (/tempbar/modificar_noche)
+- ABM Ingredientes (/tempbar/master_ingredientes) -> [DONE]
