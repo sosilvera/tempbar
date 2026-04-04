@@ -1,0 +1,56 @@
+/* Hereda los estilos visuales de dashboard y crear_trago (glass-input, etc) */
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 8px;
+}
+.glass-input:focus {
+    box-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+    border-color: #00f2fe !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Fila interactiva del ingrediente */
+.ingrediente-row {
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.ingrediente-row:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Checkbox personalizado más grande */
+.form-check-input {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.form-check-input:checked {
+    background-color: #00f2fe;
+    border-color: #00f2fe;
+}
+
+/* Botón Neón verde para agregar */
+.btn-neon-success {
+    background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    color: #121212;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-neon-success:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(56, 239, 125, 0.5);
+    color: #121212;
+}
+
+/* Alerta visual en caso de error de validación */
+.border-danger {
+    border-color: #ff416c !important;
+    box-shadow: 0 0 8px rgba(255, 65, 108, 0.4);
+}

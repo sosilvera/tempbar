@@ -81,6 +81,9 @@ class Querys():
             # Update Noche set activo = 0 where activo = 1;
             self.session.query(Noche).filter(Noche.activo == 1).update({Noche.activo: 0})
             self.session.commit()
+            # Borrar todos los ingredientes de la noche que se finaliza
+            self.session.query(NocheIngrediente).filter(NocheIngrediente.idNoche == self.noche_activa()["value"]).delete()
+            self.session.commit()
             return {"message": "Noche finalizada"}
         except Exception as e:
             self.session.rollback()

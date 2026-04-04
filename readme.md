@@ -69,6 +69,6 @@ Barman:
 - /tempbar/barman: dashboard del barman -> [DONE]
 - Ver pedidos - /tempbar/pedidos: listado de pedidos pendientes -> [DONE]
 - Crear trago (/tempbar/crear_trago) -> [DONE]
-- Crear noche (/tempbar/crear_noche)
+- Crear noche (/tempbar/crear_noche) -> [DONE]
 - Modificar noche (/tempbar/modificar_noche)
 - ABM Ingredientes (/tempbar/master_ingredientes) -> [DONE]

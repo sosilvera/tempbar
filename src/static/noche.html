@@ -3,42 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Noche</title>
+    <title>Crear Noche</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/barman_dashboard.css" rel="stylesheet">
+    <link href="/static/css/barman_crear_noche.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-4">
-        <a href="/barman" class="btn btn-secondary mb-4">&larr; Volver al Menú</a>
-        <h2>Gestión de la Noche</h2>
-        
-        <div class="card bg-dark border-secondary mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Estado: <span id="estado-noche" class="text-danger">Cerrado</span></h5>
-                <button class="btn btn-success me-2" onclick="abrirNoche()">Abrir Barra</button>
-                <button class="btn btn-danger" onclick="cerrarNoche()">Cerrar Barra</button>
+    <div class="container mt-4 mb-5">
+        <div class="d-flex align-items-center mb-4">
+            <button class="btn btn-outline-light rounded-circle me-3 p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" onclick="window.location.href='/tempbar/barman'">
+                <i class="bi bi-arrow-left fs-5"></i>
+            </button>
+            <h2 class="fw-bold m-0 text-info">Abrir Barra</h2>
+        </div>
+
+        <div id="alerta-noche" class="alert d-none rounded-4 text-center glass-alert mb-4" role="alert"></div>
+
+        <div class="card glass-card shadow-lg border-0 mb-4">
+            <div class="card-body p-4">
+                <h5 class="text-white-50 small text-uppercase tracking-wider mb-3">Elegir ingredientes disponibles</h5>
+                
+                <div id="lista-ingredientes" class="d-flex flex-column gap-2 mb-4" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;">
+                    <div class="text-center my-4 spinner-border text-info mx-auto" role="status"></div>
+                </div>
+
+                <hr class="border-secondary mb-4">
+
+                <h5 class="text-white-50 small text-uppercase tracking-wider mb-3">Agregar otro ingrediente</h5>
+                <form id="form-nuevo-ing" class="row g-2 align-items-center bg-dark p-3 rounded-4 border border-secondary" onsubmit="event.preventDefault(); agregarIngredienteNuevo();">
+                    <div class="col-12 col-md-5">
+                        <input type="text" class="form-control glass-input" id="nuevo-nombre" placeholder="Nombre" autocomplete="off" required>
+                    </div>
+                    <div class="col-7 col-md-4">
+                        <input type="number" step="0.01" class="form-control glass-input" id="nuevo-cantidad" placeholder="Cantidad" required>
+                    </div>
+                    <div class="col-5 col-md-3">
+                        <button type="submit" class="btn btn-neon-success w-100 h-100 rounded-3 py-2" id="btn-agregar-nuevo">
+                            Agregar
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
 
-        <h4>Cargar Stock de la Noche</h4>
-        <form id="form-stock" class="row g-3 mb-4">
-            <div class="col-md-6">
-                <label>Ingrediente</label>
-                <select class="form-select bg-secondary text-white border-0" id="select-ingrediente"></select>
-            </div>
-            <div class="col-md-4">
-                <label>Cantidad (ml/gr/un)</label>
-                <input type="number" class="form-control bg-secondary text-white border-0" id="cantidad-stock">
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-primary w-100" onclick="agregarStock()">Agregar</button>
-            </div>
-        </form>
+        <button type="button" class="btn-neon w-100 py-3 fs-5" id="btn-crear-noche" onclick="crearNoche()">
+            Crear Noche
+        </button>
 
-        <table class="table table-dark">
-            <thead><tr><th>Ingrediente</th><th>Cantidad Disponible</th></tr></thead>
-            <tbody id="tabla-stock"></tbody>
-        </table>
     </div>
-    <script src="js/barman_noche.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/barman_crear_noche.js"></script>
 </body>
 </html>
