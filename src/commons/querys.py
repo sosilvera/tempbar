@@ -90,10 +90,20 @@ class Querys():
         try:
             # select tp.idPedido, tp.idTrago, tp.nombre_cliente, t.nombre from tragos.pedidos tp
             # inner join tragos.tragos t on tp.idTrago = t.idTrago;
-            result = self.session.query(Pedidos.idPedido, Pedidos.idTrago, Pedidos.nombre_cliente, Trago.nombre).join(Trago, Pedidos.idTrago == Trago.idTrago).all()
+            result = self.session.query(Pedidos.idPedido, Pedidos.idTrago, Pedidos.nombre_cliente, Trago.nombre).join(Trago, Pedidos.idTrago == Trago.idTrago).filter(Pedidos.completado == False).all()
             return [{"idPedido": r[0], "idTrago": r[1], "nombreCliente": r[2], "nombreTrago": r[3]} for r in result]
         except Exception as e:
             return []
+
+    def completar_pedido(self, idPedido):
+        try:
+            # Update Pedidos set completado = 1 where idPedido = id;
+            self.session.query(Pedidos).filter(Pedidos.idPedido == idPedido).update({Pedidos.completado: True})
+            self.session.commit()
+            return {"message": "Pedido completado"}
+        except Exception as e:
+            self.session.rollback()
+            return {"message": "Error al completar el pedido"}
 
     def get_pedido_by_id(self, idPedido):
         try:

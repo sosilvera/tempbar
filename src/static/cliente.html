@@ -1,49 +1,45 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barman en Casa - Menú</title>
+    <title>Hacer un Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/static/css/cliente.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4 text-primary">¿Qué vas a tomar hoy?</h1>
-        
-        <div class="row" id="menu-tragos">
-            <div class="col-md-4 mb-3">
-                <div class="card card-trago p-3">
-                    <h5 class="card-title text-warning">Fernet con Coca</h5>
-                    <p class="card-text text-muted small">El clásico argentino.</p>
-                    <button class="btn btn-outline-primary btn-sm" onclick="abrirModalPedido(1, 'Fernet con Coca')">Pedir este</button>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                <div class="card card-glass shadow-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="text-center mb-5 fw-bold" style="color: #00f2fe;">¿Qué vas a tomar?</h2>
+
+                        <div id="mensaje-estado" class="alert d-none text-center rounded-4" role="alert"></div>
+
+                        <form id="form-pedido" class="d-none">
+                            <div class="mb-5">
+                                <label for="nombre-cliente" class="form-label text-white-50 ms-1 small text-uppercase tracking-wider">Tu Nombre</label>
+                                <input type="text" class="form-control custom-input" id="nombre-cliente" placeholder="Ej: Fede" autocomplete="off" required>
+                            </div>
+
+                            <div class="mb-5">
+                                <label class="form-label text-white-50 ms-1 small text-uppercase tracking-wider mb-3">Elegí tu trago</label>
+                                <div id="lista-tragos" class="d-flex flex-column gap-3">
+                                    </div>
+                            </div>
+
+                            <div class="d-grid mt-5">
+                                <button type="button" class="btn btn-neon" id="btn-enviar" onclick="enviarPedido()">Preparar Pedido</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="pedidoModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-light">
-          <div class="modal-header border-secondary">
-            <h5 class="modal-title" id="modalTragoNombre">Pedir Trago</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="inputIdTrago">
-            <div class="mb-3">
-                <label for="inputNombreCliente" class="form-label">Tu Nombre</label>
-                <input type="text" class="form-control bg-secondary text-white border-0" id="inputNombreCliente" placeholder="Ej: Fede">
-            </div>
-          </div>
-          <div class="modal-footer border-secondary">
-            <button type="button" class="btn btn-primary" onclick="enviarPedido()">Enviar Pedido al Barman</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/client.js"></script>
+    <script src="/static/js/cliente.js"></script>
 </body>
 </html>

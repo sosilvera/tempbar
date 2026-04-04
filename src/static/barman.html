@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Barman</title>
+    <title>Dashboard Barman</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/static/css/barman_dashboard.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="text-center mb-5 text-primary">Panel de Control - Barman</h2>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-5">
-                <a href="noche.html" class="btn btn-outline-light w-100 py-4 fs-4">Gestión de Noche</a>
-            </div>
-            <div class="col-md-5">
-                <a href="pedidos.html" class="btn btn-outline-warning w-100 py-4 fs-4">Ver Pedidos Pendientes</a>
-            </div>
-            <div class="col-md-5">
-                <a href="tragos.html" class="btn btn-outline-info w-100 py-4 fs-4">Crear Tragos</a>
-            </div>
-            <div class="col-md-5">
-                <a href="ingredientes.html" class="btn btn-outline-success w-100 py-4 fs-4">Maestro Ingredientes</a>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card card-glass shadow-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="fw-bold m-0" style="color: #00f2fe;">Panel Barman</h2>
+                            <span id="badge-estado" class="badge bg-secondary p-2">Verificando...</span>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <button id="btn-pedidos" class="btn-neon" onclick="window.location.href='/tempbar/pedidos'">Ver Pedidos</button>
+                            </div>
+                            <div class="col-6">
+                                <button id="btn-crear-trago" class="btn-neon" onclick="window.location.href='/tempbar/crear_trago'">Crear Trago</button>
+                            </div>
+                            <div class="col-6">
+                                <button id="btn-crear-noche" class="btn-neon" onclick="window.location.href='/tempbar/crear_noche'">Crear Noche</button>
+                            </div>
+                            <div class="col-6">
+                                <button id="btn-modificar-noche" class="btn-neon" onclick="window.location.href='/tempbar/modificar_noche'">Modificar Noche</button>
+                            </div>
+                            <div class="col-6">
+                                <button id="btn-abm-ingredientes" class="btn-neon" onclick="window.location.href='/tempbar/master_ingredientes'">ABM Ingredientes</button>
+                            </div>
+                            <div class="col-6">
+                                <button id="btn-finalizar-noche" class="btn-neon btn-neon-danger" onclick="finalizarNoche()">Finalizar Noche</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="/static/js/barman_dashboard.js"></script>
 </body>
 </html>

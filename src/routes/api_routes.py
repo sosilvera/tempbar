@@ -79,6 +79,11 @@ async def crear_trago(trago: CrearTrago):
     result = q.crear_trago(trago)
     return result
 
+@router.post("/completar_pedido/{idPedido}")
+async def completar_pedido(idPedido: int):
+    result = q.completar_pedido(idPedido)
+    return result
+
 @router.post("/crear_ingrediente")
 async def crear_ingrediente(ingrediente: CrearIngrediente):
     result = q.crear_ingrediente(ingrediente) # result es el id del ingrediente creado

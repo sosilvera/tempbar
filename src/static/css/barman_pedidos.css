@@ -1,0 +1,38 @@
+/* Estilo específico para las tarjetas clickeables de la lista */
+.card-pedido-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-pedido-glass:hover {
+    background: rgba(0, 242, 254, 0.1);
+    border-color: rgba(0, 242, 254, 0.4);
+    transform: translateX(5px);
+}
+
+/* Modal con efecto cristal */
+.glass-modal {
+    background: rgba(20, 25, 30, 0.95) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.alert-glass {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* Textarea deshabilitado pero legible */
+.readonly-textarea {
+    resize: none;
+    cursor: default;
+}
+.readonly-textarea:focus {
+    box-shadow: none;
+    border-color: #6c757d;
+}

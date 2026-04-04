@@ -1,0 +1,57 @@
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.card-glass {
+    background: rgba(25, 30, 40, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+/* Botón Neón Azul (Acciones comunes) */
+.btn-neon {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    color: #121212;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 12px;
+    padding: 15px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    width: 100%;
+}
+
+.btn-neon:not(:disabled):hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    color: #121212;
+}
+
+/* Botón Neón Rojo (Finalizar Noche) */
+.btn-neon-danger {
+    background: linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%);
+    color: white;
+}
+
+.btn-neon-danger:not(:disabled):hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 65, 108, 0.5);
+    color: white;
+}
+
+/* Estilo para botones deshabilitados (Grisados) */
+button:disabled {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #666 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none !important;
+}

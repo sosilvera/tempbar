@@ -5,26 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos Pendientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/barman_dashboard.css" rel="stylesheet">
+    <link href="/static/css/barman_pedidos.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-4">
-        <a href="/barman" class="btn btn-secondary mb-4">&larr; Volver al Menú</a>
+    <div class="container mt-4 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Pedidos Pendientes</h2>
-            <button class="btn btn-outline-info" onclick="cargarPedidos()">Actualizar Lista</button>
+            <button class="btn btn-outline-light rounded-pill px-4" onclick="window.location.href='/tempbar/barman'">
+                <i class="bi bi-arrow-left"></i> Volver
+            </button>
+            <h2 class="fw-bold m-0 text-info">Pedidos Pendientes</h2>
+            <button class="btn btn-outline-info rounded-circle p-2" onclick="cargarPedidos()" title="Actualizar">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
         </div>
-        
-        <div class="row" id="contenedor-pedidos">
-            <div class="col-md-4 mb-3">
-                <div class="card bg-dark border-warning p-3">
-                    <h4 class="text-warning">Destornillador</h4>
-                    <p><strong>Para:</strong> Juan</p>
-                    <p class="small text-muted"><em>Instrucciones: Hielo, 30% Vodka...</em></p>
-                    <button class="btn btn-success w-100" onclick="entregarPedido(1)">Entregado</button>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6" id="lista-pedidos">
+                <div class="text-center mt-5 spinner-border text-info" role="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDetallePedido" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal border-0 shadow-lg">
+                <div class="modal-header border-secondary">
+                    <h4 class="modal-title fw-bold text-info" id="modal-titulo">Cargando...</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body p-4">
+                    <h5 class="text-white-50 small text-uppercase tracking-wider mb-3">Ingredientes</h5>
+                    <ul class="list-group list-group-flush rounded-3 mb-4" id="modal-ingredientes">
+                        </ul>
+
+                    <h5 class="text-white-50 small text-uppercase tracking-wider mb-2">Instrucciones</h5>
+                    <textarea class="form-control bg-dark text-white border-secondary readonly-textarea" 
+                              id="modal-instrucciones" rows="4" readonly></textarea>
+                </div>
+                
+                <div class="modal-footer border-secondary justify-content-center">
+                    <button type="button" class="btn-neon w-100" id="btn-completar" onclick="completarTragoActual()">
+                        Completar Trago
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="js/barman_pedidos.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/barman_pedidos.js"></script>
 </body>
 </html>
