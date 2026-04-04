@@ -1,0 +1,49 @@
+/* Hereda clases de barman_dashboard.css (glass-card, btn-neon, etc.) */
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 12px 15px;
+}
+.glass-input:focus {
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    border-color: #00f2fe !important;
+}
+
+.glass-modal {
+    background: rgba(20, 25, 30, 0.95) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-neon-success {
+    background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    color: #121212;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-neon-success:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(56, 239, 125, 0.6);
+    color: #121212;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Estilo para la lista de autocompletado */
+#sugerencias-ingredientes {
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#sugerencias-ingredientes li:hover {
+    background-color: rgba(0, 242, 254, 0.2) !important;
+    color: #00f2fe !important;
+}

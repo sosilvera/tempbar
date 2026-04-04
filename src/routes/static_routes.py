@@ -19,3 +19,7 @@ async def read_root():
 @router.get("/master_ingredientes")
 async def read_root():
     return FileResponse("static/master_ingredientes.html")
+
+@router.get("/crear_trago")
+async def read_root():
+    return FileResponse("static/tragos.html")
