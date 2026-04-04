@@ -196,6 +196,61 @@ class Querys():
             self.session.rollback()
             return {"message": "Error al crear la noche"}
 
+    def crear_ingrediente(self, ingrediente):
+        try:
+            new_ingrediente = MasterIngrediente(
+                nombre=ingrediente.nombre
+            )
+            self.session.add(new_ingrediente)
+            self.session.commit()
+            return new_ingrediente.idIngrediente
+        except Exception as e:
+            print(e)
+            self.session.rollback()
+            return 0
+    
+    def crear_trago(self, trago):
+        try:
+            new_trago = Trago(
+                nombre=trago.nombre,
+                instrucciones=trago.instrucciones
+            )
+            self.session.add(new_trago)
+            self.session.commit()
+
+            id_trago = new_trago.idTrago
+
+            for ingrediente in trago.ingredientes:
+                new_trago_ingrediente = TragoIngrediente(
+                    idTrago=id_trago,
+                    idIngrediente=ingrediente["idIngrediente"],
+                    cantidad=ingrediente["cantidad"],
+                    unidad_medida=ingrediente["unidad_medida"]
+                )
+                self.session.add(new_trago_ingrediente)
+            self.session.commit()
+            return {"idTrago": id_trago, "message": "Trago creado"}
+        except Exception as e:
+            print(e)
+            self.session.rollback()
+            return {"idTrago": 0, "message": "Error al crear el trago"}
+
+    def eliminar_ingrediente(self, idIngrediente):
+        try:
+            # Eliminar el ingrediente del master
+            self.session.query(MasterIngrediente).filter(MasterIngrediente.idIngrediente == idIngrediente).delete()
+            self.session.commit()
+
+            # Eliminar el ingrediente de la noche actual
+            self.session.query(NocheIngrediente).filter(NocheIngrediente.idIngrediente == idIngrediente).delete()
+            self.session.commit()
+
+            return {"message": "Ingrediente eliminado"}
+        except Exception as e:
+            print(e)
+            self.session.rollback()
+            return {"message": "Error al eliminar el ingrediente"}
+
     # Cierro la sesion de la base
     def sessionClose(self):
         self.session.close()

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from models.models import (CrearPedido, IngredientesNoche)
+from models.models import (CrearPedido, IngredientesNoche, CrearTrago, CrearIngrediente)
 from commons.querys import Querys
 import commons.utils as utils
 
@@ -71,5 +71,20 @@ async def crear_noche(ingredientes: IngredientesNoche):
         q.finalizar_noche()
     
     result = q.crear_noche(ingredientes)
-    
+
+    return result
+
+@router.post("/crear_trago")
+async def crear_trago(trago: CrearTrago):
+    result = q.crear_trago(trago)
+    return result
+
+@router.post("/crear_ingrediente")
+async def crear_ingrediente(ingrediente: CrearIngrediente):
+    result = q.crear_ingrediente(ingrediente) # result es el id del ingrediente creado
+    return {"message": "Ingrediente creado", "idIngrediente": result}
+
+@router.post("/eliminar_ingrediente/{idIngrediente}")
+async def eliminar_ingrediente(idIngrediente: int):
+    result = q.eliminar_ingrediente(idIngrediente)
     return result
