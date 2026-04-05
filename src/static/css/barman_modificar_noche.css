@@ -1,0 +1,65 @@
+/* Heredamos estilos de botones, tarjetas y glass-input del dashboard base */
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 8px;
+}
+.glass-input:focus {
+    box-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+    border-color: #00f2fe !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Transiciones para las filas */
+.row-activo, .row-agregar {
+    transition: all 0.3s ease;
+}
+.row-activo:hover, .row-agregar:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Efecto visual al marcar un ingrediente para SACAR */
+.marcado-para-sacar {
+    background-color: rgba(255, 65, 108, 0.1) !important;
+    opacity: 0.8;
+}
+
+/* Checkbox personalizado */
+.form-check-input {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.form-check-input:checked {
+    background-color: #00f2fe;
+    border-color: #00f2fe;
+}
+
+/* Bordes para validaciones */
+.border-info {
+    border-color: #00f2fe !important;
+    box-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
+}
+.border-danger {
+    border-color: #ff416c !important;
+    box-shadow: 0 0 8px rgba(255, 65, 108, 0.3);
+}
+
+/* Para navegadores webkit: estilo al scrollbar interno */
+div::-webkit-scrollbar {
+    width: 6px;
+}
+div::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}

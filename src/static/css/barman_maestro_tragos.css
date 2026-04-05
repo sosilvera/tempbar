@@ -1,0 +1,42 @@
+/* Heredamos .glass-card y fondos base del dashboard */
+
+.glass-input {
+    background: rgba(25, 30, 40, 0.85) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.glass-input:focus {
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    border-color: #00f2fe !important;
+}
+
+/* Pastillas de ingredientes */
+.badge-ingrediente {
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 0.85rem;
+    font-weight: 400;
+    border-radius: 8px;
+    letter-spacing: 0.3px;
+}
+
+/* Ajustes para el botón de colapsar */
+.btn-outline-info {
+    border-color: rgba(0, 242, 254, 0.3);
+    color: #00f2fe;
+    transition: all 0.3s ease;
+}
+.btn-outline-info:hover, .btn-outline-info:focus, .btn-outline-info:active {
+    background-color: rgba(0, 242, 254, 0.1) !important;
+    border-color: #00f2fe !important;
+    color: #00f2fe !important;
+    box-shadow: none !important;
+}
+
+/* Acordeón transición suave */
+.collapse {
+    transition: height 0.3s ease;
+}

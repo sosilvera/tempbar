@@ -27,3 +27,11 @@ async def read_root():
 @router.get("/crear_noche")
 async def read_root():
     return FileResponse("static/noche.html")
+
+@router.get("/maestro_tragos")
+async def read_root():
+    return FileResponse("static/master_tragos.html")
+
+@router.get("/modificar_noche")
+async def read_root():
+    return FileResponse("static/modificar_noche.html")

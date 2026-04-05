@@ -1,10 +1,12 @@
 def tragos_preparables(ingredientes, tragosIngredientes):
     tragosPreparables = []
-    
+    print(ingredientes)
+    print(tragosIngredientes)
+
     for trago in tragosIngredientes:
         preparable = True
-        ingredientes = trago["ingredientes"]
-        for i in ingredientes:
+        iTrago = trago["ingredientes"]
+        for i in iTrago:
             if i not in ingredientes:
                 preparable = False
                 break

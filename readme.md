@@ -28,6 +28,8 @@ Las APIs identificadas son las siguientes
 	- En Ver Pedidos:
 		-/get_pedidos -> [DONE]
 		-/get_pedido/idPedido [DONE]
+	- Maestro de tragos:
+		-/get_all_tragos -> [DONE]
 
 La base de datos consta de las siguientes tablas
 - Master de ingredientes
@@ -70,5 +72,6 @@ Barman:
 - Ver pedidos - /tempbar/pedidos: listado de pedidos pendientes -> [DONE]
 - Crear trago (/tempbar/crear_trago) -> [DONE]
 - Crear noche (/tempbar/crear_noche) -> [DONE]
-- Modificar noche (/tempbar/modificar_noche)
+- Modificar noche (/tempbar/modificar_noche) -> [DONE]
+- Maestro de tragos (/tembar/master_tragos) -> [DONE]
 - ABM Ingredientes (/tempbar/master_ingredientes) -> [DONE]

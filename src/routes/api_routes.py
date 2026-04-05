@@ -13,23 +13,25 @@ async def get_tragos(): # Falta agregar que devuelva el nombre del trago, no sol
     noche = q.noche_activa()
     
     if noche:
-        ingredientes = q.get_ingredientes_noche()
+        ingredientes = q.get_ingredientes_noche(noche["value"])
         tragosIngredientes = q.get_tragos_ingredientes()
-
         tragosPreparables = utils.tragos_preparables(ingredientes, tragosIngredientes)
         tragosFinales = []
         for trago in tragosPreparables:
             trago_info = q.get_tragos_by_id(trago)
-            print(trago_info)
             tragosFinales.append({"idTrago": trago, "nombre": trago_info["nombre"]})
 
     else:
         tragosPreparables = []
     return tragosFinales
 
+@router.get("/get_all_tragos")
+async def get_all_tragos():
+    tragos = q.get_all_tragos()
+    return tragos
+
 @router.post("/crear_pedido")
 async def crear_pedido(pedido: CrearPedido):
-    print(pedido)
     pedido = q.crear_pedido(pedido)
     return {"message": "Pedido creado"}
 
@@ -38,6 +40,37 @@ async def crear_pedido(pedido: CrearPedido):
 async def get_noche_activa():
     noche = q.noche_activa()
     return noche
+
+@router.get("/get_ingredientes_noche")
+async def get_ingredientes_noche():
+    noche = q.noche_activa()
+        
+    if not noche:
+        return {"activos": [], "para_agregar": []}
+        
+    ingredientes_activos = q.get_ingredientes_noche(noche["value"])
+    todos_ingredientes = q.get_ingredientes()
+
+    activos = []
+    inactivos = []
+    for i in todos_ingredientes:
+        if i['idIngrediente'] in ingredientes_activos:
+            activos.append(i)
+        else:
+            inactivos.append(i) 
+        
+    return {"activos": activos, "para_agregar": inactivos}
+
+@router.post("/modificar_noche")
+async def modificar_noche(ingredientes: IngredientesNoche):
+    # Validar que exista una noche activa
+    noche_activa = q.noche_activa()
+
+    if not noche_activa:
+        raise HTTPException(status_code=400, detail="No hay ninguna noche activa")
+
+    result = q.modificar_noche(ingredientes)
+    return result
 
 @router.post("/finalizar_noche")
 async def finalizar_noche():

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Noche</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/barman_dashboard.css" rel="stylesheet">
+    <link href="/static/css/barman_modificar_noche.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4 mb-5">
+        <div class="d-flex align-items-center mb-4">
+            <button class="btn btn-outline-light rounded-circle me-3 p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" onclick="window.location.href='/tempbar/barman'">
+                <i class="bi bi-arrow-left fs-5"></i>
+            </button>
+            <h2 class="fw-bold m-0 text-info">Modificar Stock</h2>
+        </div>
+
+        <div id="alerta-modificar" class="alert d-none rounded-4 text-center glass-alert mb-4" role="alert"></div>
+
+        <div class="card glass-card shadow-lg border-0 mb-4">
+            <div class="card-body p-4">
+                <h5 class="text-white-50 small text-uppercase tracking-wider mb-3">En la barra (Activos)</h5>
+                <p class="small text-muted mb-3">Marcá los que quieras quitar de la noche actual.</p>
+                
+                <div id="lista-activos" class="d-flex flex-column gap-2" style="max-height: 250px; overflow-y: auto;">
+                    <div class="text-center my-3 spinner-border text-info mx-auto" role="status" id="spinner-activos"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card glass-card shadow-lg border-0 mb-4">
+            <div class="card-body p-4">
+                <h5 class="text-white-50 small text-uppercase tracking-wider mb-3">Disponibles para agregar</h5>
+                
+                <input type="text" class="form-control glass-input mb-3" id="buscador-agregar" placeholder="Buscar ingrediente..." autocomplete="off">
+
+                <div id="lista-agregar" class="d-flex flex-column gap-2" style="max-height: 350px; overflow-y: auto; overflow-x: hidden;">
+                    <div class="text-center my-3 spinner-border text-info mx-auto" role="status" id="spinner-agregar"></div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn-neon w-100 py-3 fs-5" id="btn-guardar-cambios" onclick="guardarCambiosNoche()">
+            Guardar Cambios
+        </button>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/barman_modificar_noche.js"></script>
+</body>
+</html>

@@ -24,15 +24,17 @@ class Querys():
             
             return {"value": result[0]}
         except Exception as e:
+            print("Error en noche_activa ", str(e))
             return {"value": 0}
 
     # Devuelve array de idIngredientes disponibles en la noche activa
-    def get_ingredientes_noche(self):
+    def get_ingredientes_noche(self, idNoche):
         try:
-            # select idIngrediente from NocheIngrediente where idNoche = 1;
-            result = self.session.query(NocheIngrediente.idIngrediente).filter(NocheIngrediente.idNoche == 1).all()
+            # select idIngrediente from NocheIngrediente where idNoche = idNoche;
+            result = self.session.query(NocheIngrediente.idIngrediente).filter(NocheIngrediente.idNoche == idNoche).all()
             return [r[0] for r in result]
         except Exception as e:
+            print("Error en get_ingredientes_noche ", str(e))
             return {"value": 0}
 
     def get_tragos_ingredientes(self):
@@ -49,6 +51,7 @@ class Querys():
             return [{"idTrago": trago_id, "ingredientes": ingredientes} 
                     for trago_id, ingredientes in tragos_dict.items()]
         except Exception as e:
+            print("Error en get_tragos_ingredientes ", str(e))
             return [{"idTrago": 0, "ingredientes": []}]
 
     def get_tragos_by_id(self, id):
@@ -57,7 +60,20 @@ class Querys():
             result = self.session.query(Trago.nombre).filter(Trago.idTrago == id).first()
             return {"nombre": result[0]}
         except Exception as e:
+            print("Error en get_tragos_by_id ", str(e))
             return {"value": 0}
+
+    def get_all_tragos(self):
+        try:
+            tragos = []
+            # select idTrago, nombre from Tragos;
+            result = self.session.query(Trago.idTrago).all()
+            for r in result:
+                tragos.append(self.get_trago(r[0]))
+            return tragos
+        except Exception as e:
+            print("Error en get_all_tragos ", str(e))
+            return []
 
     def crear_pedido(self, pedido):
         try:
@@ -73,6 +89,7 @@ class Querys():
             self.session.commit()
             return {"message": "Pedido creado"}
         except Exception as e:
+            print("Error al crear pedido: ", str(e))
             self.session.rollback()
             return {"message": "Error al crear el pedido"}
 
@@ -86,6 +103,7 @@ class Querys():
             self.session.commit()
             return {"message": "Noche finalizada"}
         except Exception as e:
+            print("Error en finalizar_noche ", str(e))
             self.session.rollback()
             return {"message": "Error al finalizar la noche"}
 
@@ -96,6 +114,7 @@ class Querys():
             result = self.session.query(Pedidos.idPedido, Pedidos.idTrago, Pedidos.nombre_cliente, Trago.nombre).join(Trago, Pedidos.idTrago == Trago.idTrago).filter(Pedidos.completado == False).all()
             return [{"idPedido": r[0], "idTrago": r[1], "nombreCliente": r[2], "nombreTrago": r[3]} for r in result]
         except Exception as e:
+            print("Error en get_pedidos ", str(e))
             return []
 
     def completar_pedido(self, idPedido):
@@ -105,6 +124,7 @@ class Querys():
             self.session.commit()
             return {"message": "Pedido completado"}
         except Exception as e:
+            print("Error en completar_pedido ", str(e))
             self.session.rollback()
             return {"message": "Error al completar el pedido"}
 
@@ -114,6 +134,7 @@ class Querys():
             result = self.session.query(Pedidos.idPedido, Pedidos.idTrago, Pedidos.nombre_cliente).filter(and_(Pedidos.idPedido == idPedido, Pedidos.completado == False)).first()
             return {"idPedido": result[0], "idTrago": result[1], "nombre_cliente": result[2]}
         except Exception as e:
+            print("Error en get_pedido_by_id ", str(e))
             return {"idPedido": 0, "idTrago": 0, "nombre_cliente": ""}
 
     def get_trago(self, idTrago):
@@ -147,7 +168,7 @@ class Querys():
                 "ingredientes": ingredientes
             }
         except Exception as e:
-            print(e)
+            print("Error en get_trago ", str(e))
             return {"idTrago": 0, "nombre": "", "instrucciones": "", "ingredientes": []}
 
     def get_ingredientes(self):
@@ -156,7 +177,18 @@ class Querys():
             result = self.session.query(MasterIngrediente.idIngrediente, MasterIngrediente.nombre).all()
             return [{"idIngrediente": r[0], "nombre": r[1]} for r in result]
         except Exception as e:
+            print("Error en get_ingredientes ", str(e))
             return []
+
+
+    def get_ingredientes_noche(self, idNoche):
+        try:
+            # select idIngrediente from NocheIngrediente where idNoche = idNoche;
+            result = self.session.query(NocheIngrediente.idIngrediente).filter(NocheIngrediente.idNoche == idNoche).all()
+            return [r[0] for r in result]
+        except Exception as e:
+            print("Error en get_ingredientes_noche ", str(e))
+            return {"value": 0}
 
     def crear_noche(self, ingredientes):
         try:
@@ -205,9 +237,38 @@ class Querys():
                 self.session.commit()
             return {"idNoche": id_noche, "message": "Noche creada"}
         except Exception as e:
-            print(e)
+            print("Error al crear la noche: ", str(e))
             self.session.rollback()
             return {"message": "Error al crear la noche"}
+
+    def modificar_noche(self, ingredientes):
+        try:
+            # Actualizar ingredientes modificados
+            for ingrediente in ingredientes.sacar:
+                self.session.query(NocheIngrediente).filter(
+                    and_(
+                        NocheIngrediente.idNoche == self.noche_activa()["value"],
+                        NocheIngrediente.idIngrediente == ingrediente["idIngrediente"]
+                    )
+                ).delete()
+            self.session.commit()
+
+            # Insertar nuevos ingredientes
+            id_noche = self.noche_activa()["value"]
+            for nuevo in ingredientes.agregar:
+                new_noche_ingrediente = NocheIngrediente(
+                    idNoche=id_noche,
+                    idIngrediente=nuevo["idIngrediente"],
+                    cantidad_disponible=nuevo["cantidad"]
+                )
+                self.session.add(new_noche_ingrediente)
+            self.session.commit()
+
+            return {"message": "Noche modificada"}
+        except Exception as e:
+            print("Error al modificar la noche: ", str(e))
+            self.session.rollback()
+            return {"message": "Error al modificar la noche"}
 
     def crear_ingrediente(self, ingrediente):
         try:
@@ -218,7 +279,7 @@ class Querys():
             self.session.commit()
             return new_ingrediente.idIngrediente
         except Exception as e:
-            print(e)
+            print("Error al crear ingrediente: ", str(e))
             self.session.rollback()
             return 0
     
@@ -244,7 +305,7 @@ class Querys():
             self.session.commit()
             return {"idTrago": id_trago, "message": "Trago creado"}
         except Exception as e:
-            print(e)
+            print("Error al crear el trago: ", str(e))
             self.session.rollback()
             return {"idTrago": 0, "message": "Error al crear el trago"}
 
@@ -260,7 +321,7 @@ class Querys():
 
             return {"message": "Ingrediente eliminado"}
         except Exception as e:
-            print(e)
+            print("Error al eliminar el ingrediente: ", str(e))
             self.session.rollback()
             return {"message": "Error al eliminar el ingrediente"}
 

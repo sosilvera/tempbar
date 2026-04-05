@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro de Tragos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/barman_dashboard.css" rel="stylesheet">
+    <link href="/static/css/barman_maestro_tragos.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4 mb-5">
+        <div class="d-flex align-items-center mb-4">
+            <button class="btn btn-outline-light rounded-circle me-3 p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" onclick="window.location.href='/tempbar/barman'">
+                <i class="bi bi-arrow-left fs-5"></i>
+            </button>
+            <h2 class="fw-bold m-0 text-info">Carta de Tragos</h2>
+        </div>
+
+        <div class="mb-4 position-sticky top-0" style="z-index: 10;">
+            <input type="text" class="form-control glass-input fs-5" id="buscador-tragos" placeholder="Buscar trago o ingrediente..." autocomplete="off">
+        </div>
+
+        <div id="lista-tragos" class="d-flex flex-column gap-3">
+            <div class="text-center mt-5 spinner-border text-info mx-auto" role="status"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/barman_maestro_tragos.js"></script>
+</body>
+</html>
