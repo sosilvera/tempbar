@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS MasterIngredientes (
 CREATE TABLE IF NOT EXISTS Tragos (
     idTrago INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    instrucciones TEXT
+    instrucciones TEXT,
+    descripcion TEXT
 );
 
 -- Tabla intermedia para la receta del trago

@@ -42,7 +42,7 @@ function inyectarFilaIngrediente(id, nombre, marcado = false, cantidad = '') {
                 </label>
             </div>
             <div style="width: 100px;">
-                <input type="number" step="0.01" class="form-control glass-input text-center py-1" id="qty-${id}" placeholder="Cant." value="${cantidad}">
+                <input type="number" step="0.01" class="form-control glass-input text-center py-1" id="qty-${id}" placeholder="Def: 1" value="${cantidad}">
             </div>
         </div>
     `;
@@ -71,9 +71,14 @@ async function agregarIngredienteNuevo() {
     const btnAgregar = document.getElementById('btn-agregar-nuevo');
 
     const nombre = inputNombre.value.trim();
-    const cantidad = inputCantidad.value;
+    
+    // Si no pone cantidad, le mandamos string vacío para que la fila lo procese con el placeholder
+    let cantidad = inputCantidad.value;
+    if (!cantidad || cantidad <= 0) {
+        cantidad = ''; // Se enviará vacío, y luego crearNoche() lo transformará en 1
+    }
 
-    if (!nombre || !cantidad) return;
+    if (!nombre) return; // El nombre sí es obligatorio
 
     btnAgregar.disabled = true;
     btnAgregar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>';
@@ -128,22 +133,21 @@ async function crearNoche() {
         const id = chk.value;
         const qtyInput = document.getElementById(`qty-${id}`).value;
         
-        if (!qtyInput || qtyInput <= 0) {
-            errorCantidad = true;
-            document.getElementById(`row-${id}`).classList.add('border-danger');
-        } else {
-            document.getElementById(`row-${id}`).classList.remove('border-danger');
-            ingredientesPayload.push({
-                idIngrediente: parseInt(id),
-                cantidad: parseFloat(qtyInput)
-            });
+        // Convertimos a número. Si está vacío, es inválido o menor/igual a cero, asignamos 1.
+        let cantidadFinal = parseFloat(qtyInput);
+        if (isNaN(cantidadFinal) || cantidadFinal <= 0) {
+            cantidadFinal = 1;
         }
+
+        // Ya no marcamos error, simplemente limpiamos por si había un borde rojo de antes
+        document.getElementById(`row-${id}`).classList.remove('border-danger');
+        
+        ingredientesPayload.push({
+            idIngrediente: parseInt(id),
+            cantidad: cantidadFinal
+        });
     });
 
-    if (errorCantidad) {
-        mostrarAlerta(alerta, "Falta especificar la cantidad en los ingredientes marcados en rojo.", "alert-danger");
-        return;
-    }
 
     // Armar el Body exacto solicitado
     const payload = {

@@ -18,6 +18,7 @@ class Trago(Base):
     idTrago = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(100), nullable=False)
     instrucciones = Column(Text)
+    descripcion = Column(Text)
     
     ingredientes = relationship("TragoIngrediente", back_populates="trago")
 

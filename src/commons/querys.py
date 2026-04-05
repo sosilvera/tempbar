@@ -54,14 +54,6 @@ class Querys():
             print("Error en get_tragos_ingredientes ", str(e))
             return [{"idTrago": 0, "ingredientes": []}]
 
-    def get_tragos_by_id(self, id):
-        try:
-            # select Nombre from Tragos where idTrago = id;
-            result = self.session.query(Trago.nombre).filter(Trago.idTrago == id).first()
-            return {"nombre": result[0]}
-        except Exception as e:
-            print("Error en get_tragos_by_id ", str(e))
-            return {"value": 0}
 
     def get_all_tragos(self):
         try:
@@ -107,10 +99,12 @@ class Querys():
             self.session.rollback()
             return {"message": "Error al finalizar la noche"}
 
-    def borrar_pedidos(self, idNoche):
+    def borrar_pedidos(self):
         try:
-            # Delete from Pedidos where idNoche = idNoche;
-            self.session.query(Pedidos).filter(Pedidos.idNoche == idNoche).delete()
+            idNoche = self.noche_activa()["value"]
+            print(idNoche)
+            # Update Pedidos set completado = 1 where idNoche = idNoche;
+            self.session.query(Pedidos).filter(Pedidos.idNoche == idNoche).update({Pedidos.completado: True})
             self.session.commit()
             return {"message": "Pedidos borrados"}
         except Exception as e:
@@ -151,7 +145,7 @@ class Querys():
     def get_trago(self, idTrago):
         try:
             # select idTrago, nombre, instrucciones from Tragos where idTrago = id;
-            result = self.session.query(Trago.idTrago, Trago.nombre, Trago.instrucciones).filter(Trago.idTrago == idTrago).first()
+            result = self.session.query(Trago.idTrago, Trago.nombre, Trago.instrucciones, Trago.descripcion).filter(Trago.idTrago == idTrago).first()
 
             
             ingredientes_result = self.session.query(
@@ -171,16 +165,17 @@ class Querys():
                 }
                 for ing in ingredientes_result
             ]
-            print(ingredientes)
+            
             return {
                 "idTrago": result[0],
                 "nombre": result[1],
                 "instrucciones": result[2],
-                "ingredientes": ingredientes
+                "ingredientes": ingredientes,
+                "descripcion": result[3]
             }
         except Exception as e:
             print("Error en get_trago ", str(e))
-            return {"idTrago": 0, "nombre": "", "instrucciones": "", "ingredientes": []}
+            return {"idTrago": 0, "nombre": "", "instrucciones": "", "ingredientes": [], "descripcion": ""}
 
     def get_ingredientes(self):
         try:

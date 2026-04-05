@@ -38,14 +38,23 @@ async function cargarTragos() {
         }
 
         tragos.forEach((trago, index) => {
+            // El primer trago de la lista viene seleccionado por defecto
             const checked = index === 0 ? 'checked' : ''; 
             
-            // Aquí está el cambio visual principal. Usamos btn-check de Bootstrap.
+            // Si por algún motivo un trago viene sin descripción, le ponemos un texto genérico
+            const descripcion = trago.descripcion ? trago.descripcion : "¡Un clásico infaltable para disfrutar!";
+            
+            // Estructura actualizada: Título en grande y descripción en pequeño debajo
             const html = `
                 <div>
                     <input type="radio" class="btn-check" name="tragoSeleccionado" id="trago-${trago.idTrago}" value="${trago.idTrago}" ${checked}>
-                    <label class="btn custom-radio-label w-100 text-start p-3 rounded-4 d-flex align-items-center" for="trago-${trago.idTrago}">
-                        <span class="fs-5 fw-semibold ms-2">${trago.nombre}</span>
+                    <label class="btn custom-radio-label w-100 text-start p-3 rounded-4" for="trago-${trago.idTrago}">
+                        <div class="ms-1">
+                            <span class="fs-5 fw-semibold d-block mb-1">${trago.nombre}</span>
+                            <small class="text-white-50 d-block text-wrap lh-sm" style="font-size: 0.85rem;">
+                                ${descripcion}
+                            </small>
+                        </div>
                     </label>
                 </div>
             `;

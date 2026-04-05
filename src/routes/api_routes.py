@@ -18,9 +18,8 @@ async def get_tragos(): # Falta agregar que devuelva el nombre del trago, no sol
         tragosPreparables = utils.tragos_preparables(ingredientes, tragosIngredientes)
         tragosFinales = []
         for trago in tragosPreparables:
-            trago_info = q.get_tragos_by_id(trago)
-            tragosFinales.append({"idTrago": trago, "nombre": trago_info["nombre"]})
-
+            trago_info = q.get_trago(trago)
+            tragosFinales.append({"idTrago": trago, "nombre": trago_info["nombre"], "descripcion": trago_info["descripcion"]})
     else:
         tragosPreparables = []
     return tragosFinales
@@ -74,6 +73,7 @@ async def modificar_noche(ingredientes: IngredientesModificarNoche):
 
 @router.post("/finalizar_noche")
 async def finalizar_noche():
+    q.borrar_pedidos()
     result = q.finalizar_noche()
     return result
 
@@ -102,7 +102,7 @@ async def crear_noche(ingredientes: IngredientesNoche):
     # Si hay noche activa, finalizarla
     if noche_activa:
         q.finalizar_noche()
-        q.borrar_pedidos(noche_activa["value"])
+        q.borrar_pedidos()
     
     result = q.crear_noche(ingredientes)
 
