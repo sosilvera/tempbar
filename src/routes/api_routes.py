@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from models.models import (CrearPedido, IngredientesNoche, CrearTrago, CrearIngrediente)
+from models.models import (CrearPedido, IngredientesNoche, CrearTrago, CrearIngrediente, IngredientesModificarNoche)
 from commons.querys import Querys
 import commons.utils as utils
 
@@ -62,7 +62,7 @@ async def get_ingredientes_noche():
     return {"activos": activos, "para_agregar": inactivos}
 
 @router.post("/modificar_noche")
-async def modificar_noche(ingredientes: IngredientesNoche):
+async def modificar_noche(ingredientes: IngredientesModificarNoche):
     # Validar que exista una noche activa
     noche_activa = q.noche_activa()
 
@@ -102,6 +102,7 @@ async def crear_noche(ingredientes: IngredientesNoche):
     # Si hay noche activa, finalizarla
     if noche_activa:
         q.finalizar_noche()
+        q.borrar_pedidos(noche_activa["value"])
     
     result = q.crear_noche(ingredientes)
 

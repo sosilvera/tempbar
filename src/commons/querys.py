@@ -107,6 +107,17 @@ class Querys():
             self.session.rollback()
             return {"message": "Error al finalizar la noche"}
 
+    def borrar_pedidos(self, idNoche):
+        try:
+            # Delete from Pedidos where idNoche = idNoche;
+            self.session.query(Pedidos).filter(Pedidos.idNoche == idNoche).delete()
+            self.session.commit()
+            return {"message": "Pedidos borrados"}
+        except Exception as e:
+            print("Error en borrar_pedidos ", str(e))
+            self.session.rollback()
+            return {"message": "Error al borrar los pedidos"}
+
     def get_pedidos(self):
         try:
             # select tp.idPedido, tp.idTrago, tp.nombre_cliente, t.nombre from tragos.pedidos tp

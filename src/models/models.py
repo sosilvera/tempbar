@@ -18,6 +18,6 @@ class CrearTrago(BaseModel):
 class CrearIngrediente(BaseModel):
     nombre: str
 
-class IngredientesNoche(BaseModel):
+class IngredientesModificarNoche(BaseModel):
     sacar: list[dict] # [{"idIngrediente": 1, "cantidad": 10, "unidad_medida": "ml"}, {"idIngrediente": 2, "cantidad": 5, "unidad_medida": "g"}]
     agregar: list[dict] # [{"nombre": "Ingrediente1", cantidad: 10, "unidad_medida": "ml"}, {"nombre": "Ingrediente2", cantidad: 5, "unidad_medida": "g"}]
