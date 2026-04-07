@@ -22,10 +22,13 @@ class Querys():
             # select idNoche from Noche where activo = 1;
             result = self.session.query(Noche.idNoche).filter(Noche.activo == 1).first()
             
+            if result is None:
+                return {"value": 0}
+            
             return {"value": result[0]}
         except Exception as e:
             print("Error en noche_activa ", str(e))
-            return {"value": 0}
+            return {"value": -1}
 
     # Devuelve array de idIngredientes disponibles en la noche activa
     def get_ingredientes_noche(self, idNoche):
